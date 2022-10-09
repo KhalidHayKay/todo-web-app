@@ -43,11 +43,13 @@ h2 {
     float: right;
     width: 30%;
     height: 25px;
+    background-color: #fff;
+    color: #1D2228;
+    border: none;
 }
 
 .search-task::placeholder {
     color: #1D2228;
-    border: none;
 }
 
 .search-task:focus {
@@ -194,4 +196,19 @@ dialog {
 
 dialog > button {
     margin: 10px
+}
+
+@media only screen and (max-width: 340px) {
+    dialog {
+        font-size: 14px;
+    }
+    dialog > button {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    .archived-task {
+        grid-template-columns: 6% 74% 20%;
+    }
 }

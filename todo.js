@@ -15,14 +15,14 @@ function addTaskFunc(){
         const optionDialog = document.createElement('dialog'); // Delete confirmation dialog
         optionDialog.textContent = 'Are you sure you want to delete this task?'
         delBtn = document.createElement('button');
-        delBtn.textContent = 'Archive instead';
+        delBtn.textContent = 'No, archive instead';
         arcBtn = document.createElement('button');
-        arcBtn.textContent = 'Delete';
+        arcBtn.textContent = 'Yes, delete';
         optionDialog.appendChild(delBtn);
         optionDialog.appendChild(arcBtn);
         document.body.appendChild(optionDialog);
         optionDialog.showModal();
-        document.getElementById('hide-tasks').checked = false;  // uncheck 'archives' checkbox so as not to display archives while adding another...
+        document.getElementById('archive-tasks').checked = false;  // uncheck 'archives' checkbox so as not to display archives while adding another...
         document.getElementsByClassName('archive-sec')[0].style.display = 'none';
         optionDialog.childNodes[1].addEventListener('click', (e) => {   // Dialog button-'Archive instead'
             newTask.parentNode.removeChild(newTask);
