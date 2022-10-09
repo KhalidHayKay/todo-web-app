@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,7 +12,7 @@ h1 {
     font-size: 30px;
     text-align: center;
     margin: 20px;
-    font-family: cursive;
+    font-family: 'poppins';
     color: #1D2228;
 }
 
@@ -36,7 +37,7 @@ h1 {
 
 h2 {
     color: #fff;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .search-task {
@@ -195,7 +196,7 @@ dialog {
 }
 
 dialog > button {
-    margin: 10px
+    margin: 10px;
 }
 
 @media only screen and (max-width: 340px) {
@@ -203,7 +204,7 @@ dialog > button {
         font-size: 14px;
     }
     dialog > button {
-        font-size: 10px;
+        font-size: 12px;
     }
 }
 

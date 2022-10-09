@@ -18,13 +18,14 @@ function addTaskFunc(){
         delBtn.textContent = 'No, archive instead';
         arcBtn = document.createElement('button');
         arcBtn.textContent = 'Yes, delete';
+        optionDialog.appendChild(document.createElement('br'))
         optionDialog.appendChild(delBtn);
         optionDialog.appendChild(arcBtn);
         document.body.appendChild(optionDialog);
         optionDialog.showModal();
         document.getElementById('archive-tasks').checked = false;  // uncheck 'archives' checkbox so as not to display archives while adding another...
         document.getElementsByClassName('archive-sec')[0].style.display = 'none';
-        optionDialog.childNodes[1].addEventListener('click', (e) => {   // Dialog button-'Archive instead'
+        optionDialog.childNodes[2].addEventListener('click', (e) => {   // Dialog button-'Archive instead'
             newTask.parentNode.removeChild(newTask);
             const archivedTask = document.createElement('li');
             const restoreIcon = document.createElement('i');
@@ -51,7 +52,7 @@ function addTaskFunc(){
             });
             optionDialog.close();
         })
-        optionDialog.childNodes[2].addEventListener('click', (e) => {   //  Dialog button-'Delete'
+        optionDialog.childNodes[3].addEventListener('click', (e) => {   //  Dialog button-'Delete'
             newTask.parentNode.removeChild(newTask);
             optionDialog.close();
         })
