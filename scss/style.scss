@@ -25,4 +25,49 @@ body {
 
 ///////////////////////////////////////////
 
-@import "homepage";
+@import "homepage", "list", "new-task", "archive";
+
+//////////////////////////////////////////
+
+h1 {
+    font-size: 20px;
+    text-align: center;
+    padding: 15px 0;
+}
+
+section {
+    background-color: $primaryColor;
+    margin-bottom: 75px;
+
+    display: none;
+}
+
+
+.nav-container {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    background-color: inherit;
+    padding: 7px 0;
+    @include flex();
+
+    nav  {
+        width: 80%;
+        background-color: lightgrey;
+        @include flex(row, $gap: 20px);
+        padding: 8px;
+        border-radius: 30px;
+        box-shadow: 0 0 20px 10px $secondaryColor;
+    
+        a {
+            color: $primaryTextColor;
+            text-decoration: none;
+            @include flex($gap: 0);
+            font-size: 13px;
+
+            i {
+                font-size: 16px;
+            }
+        }
+    }
+}

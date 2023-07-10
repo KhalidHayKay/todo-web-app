@@ -9,55 +9,54 @@ body {
   background-color: #f1f4f7;
 }
 
-h1 {
-  font-size: 20px;
-  text-align: center;
-  padding: 15px 0;
-}
-
-main {
-  min-height: 100vh;
-  height: -moz-fit-content;
-  height: fit-content;
-  background-color: #f1f4f7;
-}
-
-.nav-container {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: inherit;
-  padding: 7px 0;
+section.login .homepage-body {
+  margin-top: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-.nav-container nav {
-  width: 80%;
-  background-color: lightgrey;
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 8px;
-  border-radius: 30px;
-  box-shadow: 0 0 20px 10px white;
 }
-.nav-container nav a {
-  color: black;
-  text-decoration: none;
+section.login .homepage-body p {
+  text-align: center;
+}
+section.login .homepage-body .account {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 15px;
+}
+section.login .homepage-body .account a {
+  background-color: lightgrey;
+  opacity: 80%;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.homepage-footer {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.homepage-footer .guide {
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: lightblue;
+  color: black;
+}
+.homepage-footer .copyright {
   font-size: 13px;
 }
-.nav-container nav a i {
-  font-size: 16px;
+
+section.list {
+  display: block;
 }
 
 ul {
@@ -105,13 +104,64 @@ ul li .icons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 5px;
   font-size: 13px;
+  color: grey;
 }
 ul li .icons i {
   padding: 1px 0;
 }
 ul li .icons i:active {
-  color: grey;
+  color: black;
+}
+
+h1 {
+  font-size: 20px;
+  text-align: center;
+  padding: 15px 0;
+}
+
+section {
+  background-color: #f1f4f7;
+  margin-bottom: 75px;
+  display: none;
+}
+
+.nav-container {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: inherit;
+  padding: 7px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.nav-container nav {
+  width: 80%;
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 8px;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 10px white;
+}
+.nav-container nav a {
+  color: black;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-size: 13px;
+}
+.nav-container nav a i {
+  font-size: 16px;
 }/*# sourceMappingURL=style.css.map */

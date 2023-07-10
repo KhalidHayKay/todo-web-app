@@ -1,86 +1,43 @@
-h1 {
-    font-size: 20px;
-    text-align: center;
-    padding: 15px 0;
-}
+section.login {
+    // display: block;
 
-main {
-    min-height: 100vh;
-    height: fit-content;
-    background-color: $primaryColor;
-}
+    .homepage-body {
+        margin-top: 20px;
+        padding: 10px;
+        @include flex($gap: 20px);
 
-.nav-container {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: inherit;
-    padding: 7px 0;
-    @include flex();
+        p {
+            text-align: center;
+        }
 
-    nav  {
-        width: 80%;
-        background-color: lightgrey;
-        @include flex(row, $gap: 20px);
-        padding: 8px;
-        border-radius: 30px;
-        box-shadow: 0 0 20px 10px $secondaryColor;
-    
-        a {
-            color: $primaryTextColor;
-            text-decoration: none;
-            @include flex($gap: 0);
-            font-size: 13px;
+        .account {
+            @include flex($gap: 15px);
 
-            i {
-                font-size: 16px;
+            a {
+                // text-decoration: none;
+                background-color: lightgrey;
+                opacity: 80%;
+                color: $primaryTextColor;
+                padding: 5px 10px;
+                border-radius: 10px;
             }
         }
     }
 }
 
-ul {
+.homepage-footer {
+    margin-top: 100px;
     @include flex($gap: 10px);
-    list-style: none;
-    margin-bottom: 75px;
-    padding: 0;
 
-    li {
-        height: 70px;
-        width: 90%;
-        background-color: $secondaryColor;
-        margin: 0;
-        padding: 7px 10px;
-        @include flex(row, $justify: space-between);
-        border-radius: 5px;
-        
-        .detail {
-            width: 90%;
-            height: 100%;
-            @include flex($align: flex-start, $justify: space-between);
+    .guide {
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 20px;
+        background-color: lightblue;
+        color: $primaryTextColor;
+    }
 
-            p {
-                font-size: 13px;
-                // align
-            }
-            span {
-                font-size: 11px;
-                color: $secondaryTextColor;
-            }
-        }
-
-        .icons {
-            width: 10px;
-            height: 100%;
-            @include flex();
-            font-size: 13px;
-
-            i {
-                padding: 1px 0;
-                &:active {
-                    color: $secondaryTextColor;
-                }
-            }
-        }
+    .copyright {
+        font-size: 13px;
     }
 }
