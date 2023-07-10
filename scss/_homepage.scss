@@ -1,24 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-* {
-    box-sizing: border-box;
-    margin: 0;
-}
 
-body {
-    padding: 0 20px;
-}
 
 h1 {
     font-size: 30px;
     text-align: center;
     margin: 20px;
-    font-family: 'poppins';
+    
     color: #1D2228;
 }
 
 .app-body {
     background-color: #1D2228;
-    font-family: monospace;
     padding: 30px 15px;
     margin: auto;
 }
@@ -88,7 +79,6 @@ h2 {
 .todo-container > h5 {
     margin: auto;
     color: #585c5c;
-    font-family: serif;
     display: none;
 }
 
@@ -170,7 +160,6 @@ h2 {
 .empty {
     margin: -20px auto 0;
     color: #585c5c;
-    font-family: serif;
 }
 
 .archive-sec > button {

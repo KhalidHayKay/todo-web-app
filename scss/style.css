@@ -1,0 +1,222 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  padding: 0 20px;
+  font-family: poppins, arial;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+  margin: 20px;
+  color: #1D2228;
+}
+
+.app-body {
+  background-color: #1D2228;
+  padding: 30px 15px;
+  margin: auto;
+}
+
+@media only screen and (min-width: 500px) {
+  .app-body {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 750px) {
+  .app-body {
+    width: 60%;
+  }
+}
+h2 {
+  color: #fff;
+  font-size: 20px;
+}
+
+.search-task {
+  float: right;
+  width: 30%;
+  height: 25px;
+  background-color: #fff;
+  color: #1D2228;
+  border: none;
+}
+
+.search-task::-moz-placeholder {
+  color: #1D2228;
+}
+
+.search-task::placeholder {
+  color: #1D2228;
+}
+
+.search-task:focus {
+  outline: none;
+}
+
+.todo-container {
+  padding: 0;
+  margin: 30px 0;
+  display: grid;
+  gap: 15px;
+}
+
+.todo {
+  list-style-type: none;
+  height: 30px;
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  align-items: center;
+  padding: 0 10px;
+  border-left: 3px solid #FB9039;
+}
+
+.task-name {
+  font-size: 17px;
+  color: whitesmoke;
+}
+
+.delete, .completed {
+  justify-self: flex-end;
+  font-size: 18px;
+  color: #FB9039;
+}
+
+.todo-container > h5 {
+  margin: auto;
+  color: #585c5c;
+  display: none;
+}
+
+.add-task {
+  display: grid;
+  grid-template-areas: "taskAdd";
+  padding: 0 10px;
+}
+
+.add-task > input {
+  background-color: inherit;
+  border: none;
+  border-bottom: 2px solid #FB9039;
+  grid-area: taskAdd;
+  height: 25px;
+  transition: all 0.2s;
+  color: whitesmoke;
+  font-size: 13px;
+}
+
+.add-task > input::-moz-placeholder {
+  color: whitesmoke;
+  padding: auto;
+  font-size: 13px;
+}
+
+.add-task > input::placeholder {
+  color: whitesmoke;
+  padding: auto;
+  font-size: 13px;
+}
+
+.add-task > input:focus {
+  outline: none;
+}
+
+.add-task > i {
+  color: #FB9039;
+  grid-area: taskAdd;
+  justify-self: flex-end;
+}
+
+.archive-tasks {
+  margin-top: 20px;
+  color: whitesmoke;
+  display: flex;
+  gap: 5px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.archive-sec {
+  display: none;
+  gap: 20px;
+}
+
+.archive-container {
+  list-style: none;
+  padding: 20px 20px 0;
+  display: grid;
+  gap: 5px;
+}
+
+.archived-task {
+  color: whitesmoke;
+  display: grid;
+  grid-template-columns: 4% 76% 20%;
+  box-shadow: 2px 2px 10px #414242, -2px -2px 10px #414242;
+  align-items: center;
+}
+
+.archived-task::before {
+  content: "◈";
+  padding: 2px 0;
+  width: 8px;
+  font-weight: bold;
+  color: #FB9039;
+}
+
+.restore-icon {
+  color: #FB9039;
+  justify-self: flex-end;
+  font-size: 14px;
+}
+
+.empty {
+  margin: -20px auto 0;
+  color: #585c5c;
+}
+
+.archive-sec > button {
+  font-size: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 2px;
+  margin-left: 20px;
+  background-color: #FB9039;
+  border: none;
+  font-weight: bold;
+  display: none;
+  display: none;
+}
+
+dialog {
+  border: 1px solid blue;
+  width: 330px;
+  text-align: center;
+  margin: 10px auto;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.9);
+  /* top: 0; */
+}
+
+dialog > button {
+  margin: 10px;
+}
+
+@media only screen and (max-width: 340px) {
+  dialog {
+    font-size: 14px;
+  }
+  dialog > button {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .archived-task {
+    grid-template-columns: 6% 74% 20%;
+  }
+}/*# sourceMappingURL=style.css.map */
