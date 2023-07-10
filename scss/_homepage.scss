@@ -1,65 +1,86 @@
 h1 {
-    font-size: 23px;
+    font-size: 20px;
     text-align: center;
     padding: 15px 0;
 }
 
 main {
-    margin: 0 2px;
     min-height: 100vh;
     height: fit-content;
-    background-color: #f1f4f7;
+    background-color: $primaryColor;
 }
 
-nav  {
+.nav-container {
     position: fixed;
-    bottom: 10px;
-    left: 10%;
-    width: 80%;
-    background-color: #bbbec2;
-    @include flex(row, $gap: 20px);
-    padding: 10px;
-    border-radius: 20px;
+    bottom: 0;
+    width: 100%;
+    background-color: inherit;
+    padding: 7px 0;
+    @include flex();
 
-    a {
-        color: black;
-        text-decoration: none;
-        @include flex();
-        font-size: 15px;
+    nav  {
+        width: 80%;
+        background-color: lightgrey;
+        @include flex(row, $gap: 20px);
+        padding: 8px;
+        border-radius: 30px;
+        box-shadow: 0 0 20px 10px $secondaryColor;
+    
+        a {
+            color: $primaryTextColor;
+            text-decoration: none;
+            @include flex($gap: 0);
+            font-size: 13px;
+
+            i {
+                font-size: 16px;
+            }
+        }
     }
 }
 
 ul {
-    @include flex();
+    @include flex($gap: 10px);
     list-style: none;
+    margin-bottom: 75px;
     padding: 0;
 
     li {
-        height: 60px;
+        height: 70px;
         width: 90%;
-        background-color: white;
+        background-color: $secondaryColor;
         margin: 0;
-        padding: 7px;
-        display: flex;
+        padding: 7px 10px;
+        @include flex(row, $justify: space-between);
         border-radius: 5px;
         
         .detail {
             width: 90%;
-            @include flex($align: flex-start);
+            height: 100%;
+            @include flex($align: flex-start, $justify: space-between);
 
             p {
-                font-size: 15px;
+                font-size: 13px;
+                // align
             }
             span {
-                font-size: 12px;
-                color: grey;
+                font-size: 11px;
+                color: $secondaryTextColor;
             }
         }
 
         .icons {
             width: 10px;
+            height: 100%;
             @include flex();
             font-size: 13px;
+
+            i {
+                padding: 1px 0;
+                &:active {
+                    color: $secondaryTextColor;
+                }
+            }
         }
     }
 }

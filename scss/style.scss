@@ -5,8 +5,14 @@
     margin: 0;
 }
 
+$primaryColor: #f1f4f7;
+$secondaryColor: white;
+$primaryTextColor: black;
+$secondaryTextColor: grey;
+
 body {
     font-family: poppins, arial;
+    background-color: $primaryColor;
 }
 
 @mixin flex($direction: column, $align: center, $justify: center, $gap: 5px){
