@@ -9,6 +9,14 @@ body {
     font-family: poppins, arial;
 }
 
+@mixin flex($direction: column, $align: center, $justify: center, $gap: 5px){
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
+}
+
 ///////////////////////////////////////////
 
 @import "homepage";

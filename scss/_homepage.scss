@@ -8,26 +8,58 @@ main {
     margin: 0 2px;
     min-height: 100vh;
     height: fit-content;
-    background-color: rgb(241, 244, 247);
+    background-color: #f1f4f7;
 }
 
 nav  {
     position: fixed;
     bottom: 10px;
-    width: 90%;
-    background-color: yellow;
-    // left: 25vw;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+    left: 10%;
+    width: 80%;
+    background-color: #bbbec2;
+    @include flex(row, $gap: 20px);
     padding: 10px;
     border-radius: 20px;
 
     a {
         color: black;
         text-decoration: none;
+        @include flex();
+        font-size: 15px;
+    }
+}
+
+ul {
+    @include flex();
+    list-style: none;
+    padding: 0;
+
+    li {
+        height: 60px;
+        width: 90%;
+        background-color: white;
+        margin: 0;
+        padding: 7px;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        border-radius: 5px;
+        
+        .detail {
+            width: 90%;
+            @include flex($align: flex-start);
+
+            p {
+                font-size: 15px;
+            }
+            span {
+                font-size: 12px;
+                color: grey;
+            }
+        }
+
+        .icons {
+            width: 10px;
+            @include flex();
+            font-size: 13px;
+        }
     }
 }
