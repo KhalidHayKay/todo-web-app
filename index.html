@@ -9,10 +9,11 @@
     <title>ToDo-list app</title>
 </head>
 <body>
-    <h1>My TO-DO list</h1>
 
     <main>
         <section class="homepage">
+            <h1>My TO-DO list</h1>
+
             <div class="homepage-body">
                 <p>
                     Create an account so you can access your to-do list accross any device
@@ -30,7 +31,16 @@
             </div>
         </section>
         
+        <section class="task-textarea">
+            <textarea name="task" id="task"></textarea>
+            <button>Save</button>
+        </section>
+
         <section class="todo-list">
+            <div class="search">
+                <input type="text" name="search" id="search">
+                <i class='bx bx-search'></i>
+            </div>
             <ul>
                 <li>
                     <div class="detail">
@@ -78,8 +88,6 @@
         </nav>
     </div>
 
-    
-    <!-- <i class='bx bx-search'></i> -->
 
     <script src="app.js"></script>
 </body>
