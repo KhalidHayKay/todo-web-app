@@ -1,32 +1,33 @@
 section.homepage {
-    display: block;
+    @include flex($justify: space-between);
+    height: 85vh;
 
     .homepage-body {
-        margin-top: 20px;
         padding: 10px;
         @include flex($gap: 20px);
 
         p {
             text-align: center;
+            padding: 0 35px;
         }
 
         .account {
             @include flex($gap: 15px);
 
             a {
-                // text-decoration: none;
+                font-size: 15px;
                 background-color: lightgrey;
                 opacity: 80%;
                 color: $primaryTextColor;
                 padding: 5px 10px;
-                border-radius: 10px;
+                border-radius: 15px;
             }
         }
     }
 }
 
 .homepage-footer {
-    margin-top: 100px;
+    // margin-top: 100px;
     @include flex($gap: 10px);
 
     .guide {

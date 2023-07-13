@@ -3,10 +3,11 @@ section.todo-list {
 }
 
 .search {
-    position: relative;
+    position: fixed;
+    top: 0;
     width: 100%;
-    padding: 0 17px;
-    margin: 20px 0;
+    padding: 20px 17px 15px;
+    background-color: $primaryColor;
 
     input {
         padding: 7px;
@@ -21,7 +22,7 @@ section.todo-list {
     i {
         position: absolute;
         right: 22px;
-        top: 20%;
+        top: 40%;
         font-size: 18px;
         color: $secondaryTextColor;
 
@@ -34,8 +35,7 @@ section.todo-list {
 ul {
     @include flex($gap: 10px);
     list-style: none;
-    margin-bottom: 75px;
-    padding: 0;
+    padding: 70px 0 10px;
 
     li {
         height: 70px;
@@ -45,6 +45,7 @@ ul {
         padding: 7px 10px;
         @include flex(row, $justify: space-between);
         border-radius: 5px;
+        box-shadow: 1px 1px 2px 0 $secondaryTextColor;
         
         .detail {
             width: 90%;
@@ -75,5 +76,22 @@ ul {
                 }
             }
         }
+    }
+}
+
+.add-task {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: solid 1px $secondaryTextColor;
+    background-color: $secondaryTextColor;
+    @include flex();
+
+    i {
+    font-size: 28px;
+    color: $primaryColor;
     }
 }

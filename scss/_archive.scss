@@ -1,0 +1,31 @@
+section.archives {
+    // display: block;
+
+    h2 {
+        margin: 20px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    ul {
+        padding: 20px 0;
+        gap: 5px;
+
+        li {
+            height: 45px;
+            background-color: $secondaryTextColor;
+            color: $secondaryColor;
+            box-shadow: none;
+
+            p {
+                font-size: 13px;
+            }
+
+            i {
+                font-size: 15px;
+                border-left: 1px solid $primaryColor;
+                padding-left: 10px;
+            }
+        }
+    }
+}

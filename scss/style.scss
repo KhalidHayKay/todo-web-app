@@ -42,32 +42,23 @@ section {
     display: none;
 }
 
-
-.nav-container {
+nav  {
     position: fixed;
     bottom: 0;
-    width: 100vw;
-    background-color: inherit;
-    padding: 7px 0;
-    @include flex();
+    width: 100%;
+    background-color: $primaryColor;
+    @include flex(row, $gap: 20px, $justify: space-evenly);
+    padding: 10px 50px;
+    // border-bottom: 1px solid $secondaryTextColor;
 
-    nav  {
-        width: 80%;
-        background-color: lightgrey;
-        @include flex(row, $gap: 20px);
-        padding: 8px;
-        border-radius: 30px;
-        box-shadow: 0 0 20px 10px $secondaryColor;
-    
-        a {
-            color: $primaryTextColor;
-            text-decoration: none;
-            @include flex($gap: 0);
-            font-size: 13px;
+    a {
+        text-decoration: none;
+        @include flex($gap: 5px);
+        font-size: 11px;
 
-            i {
-                font-size: 16px;
-            }
+        i {
+            color: #555;
+            font-size: 20px;
         }
     }
 }
