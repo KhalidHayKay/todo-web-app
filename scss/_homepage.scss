@@ -1,18 +1,19 @@
 section.homepage {
-    @include flex($justify: space-between);
-    height: 85vh;
+
+    // height: 85vh;
 
     .homepage-body {
-        padding: 10px;
-        @include flex($gap: 20px);
+        @include flex($gap: 60px, $justify: space-between);
 
-        p {
-            text-align: center;
-            padding: 0 35px;
+        .homepage-header {
+            p {
+                text-align: center;
+                padding: 0 40px;
+            }
         }
 
         .account {
-            @include flex($gap: 15px);
+            @include flex(row, $gap: 15px);
 
             a {
                 font-size: 15px;
@@ -20,25 +21,33 @@ section.homepage {
                 opacity: 80%;
                 color: $primaryTextColor;
                 padding: 5px 10px;
-                border-radius: 15px;
+                border-radius: 2px;
+                text-decoration: none;
+            }
+        }
+
+        .color-mode {
+    
+            div {
+                height: 30px;
+                width: 30px;
+                background-color: black;
+                border-radius: 50%;
+            }
+        }
+        
+        .homepage-footer {
+            // margin-top: 100px;
+            @include flex($gap: 10px);
+        
+            .guide {
+                text-decoration: none;
+                padding: 5px;
+                border-radius: 20px;
+                background-color: lightblue;
+                color: $primaryTextColor;
             }
         }
     }
 }
 
-.homepage-footer {
-    // margin-top: 100px;
-    @include flex($gap: 10px);
-
-    .guide {
-        text-decoration: none;
-        padding: 5px;
-        border-radius: 20px;
-        background-color: lightblue;
-        color: $primaryTextColor;
-    }
-
-    .copyright {
-        font-size: 13px;
-    }
-}

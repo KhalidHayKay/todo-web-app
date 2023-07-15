@@ -1,13 +1,15 @@
-section.todo-list {
-    // display: block;
-}
-
 .search {
     position: fixed;
     top: 0;
     width: 100%;
     padding: 20px 17px 15px;
     background-color: $primaryColor;
+    @include MQ(450px){
+        padding: 20px 25px 15px;
+    }
+    @include MQ(768px){
+        padding: 20px 35px 15px;
+    }
 
     input {
         padding: 7px;
@@ -25,6 +27,12 @@ section.todo-list {
         top: 40%;
         font-size: 18px;
         color: $secondaryTextColor;
+        @include MQ(450px){
+            right: 30px;
+        }
+        @include MQ(450px){
+            right: 40px;
+        }
 
         &:active {
             color: blue;
@@ -81,8 +89,8 @@ ul {
 
 .add-task {
     position: fixed;
-    bottom: 80px;
-    right: 30px;
+    bottom: 70px;
+    right: 50px;
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -93,5 +101,47 @@ ul {
     i {
     font-size: 28px;
     color: $primaryColor;
+    }
+}
+
+.task-textarea {
+    @include flex($gap: 0px);
+
+    display: none;
+    
+    background-color: white;
+    position: fixed;
+    width: 90%;
+    bottom: 70px;
+    left: 5%;
+    z-index: 3;
+    overflow: hidden;
+    border: 1px solid $secondaryTextColor;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    textarea {
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        resize: none;
+        border: none;
+        border-bottom: 1px solid $primaryColor;
+        outline: none;
+    }
+
+    button {
+        background: $primaryColor;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin: 5px;
+        align-self: flex-end;
+        color: $secondaryTextColor;
+
+        &:active {
+            background: $secondaryTextColor;
+            color: $secondaryColor;
+        }
     }
 }

@@ -23,9 +23,15 @@ body {
     gap: $gap;
 }
 
+@mixin MQ($width){
+    @media only screen and (min-width: $width) {
+        @content;
+    }
+}
+
 ///////////////////////////////////////////
 
-@import "homepage", "list", "new-task", "archive";
+@import "homepage", "todo-list", "archive";
 
 //////////////////////////////////////////
 

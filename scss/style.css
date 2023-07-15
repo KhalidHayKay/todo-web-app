@@ -9,29 +9,20 @@ body {
   background-color: #f1f4f7;
 }
 
-section.homepage {
+section.homepage .homepage-body {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
-  height: 85vh;
+  gap: 60px;
 }
-section.homepage .homepage-body {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-section.homepage .homepage-body p {
+section.homepage .homepage-body .homepage-header p {
   text-align: center;
-  padding: 0 35px;
+  padding: 0 40px;
 }
 section.homepage .homepage-body .account {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 15px;
@@ -42,25 +33,28 @@ section.homepage .homepage-body .account a {
   opacity: 80%;
   color: black;
   padding: 5px 10px;
-  border-radius: 15px;
+  border-radius: 2px;
+  text-decoration: none;
 }
-
-.homepage-footer {
+section.homepage .homepage-body .color-mode div {
+  height: 30px;
+  width: 30px;
+  background-color: black;
+  border-radius: 50%;
+}
+section.homepage .homepage-body .homepage-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
-.homepage-footer .guide {
+section.homepage .homepage-body .homepage-footer .guide {
   text-decoration: none;
   padding: 5px;
   border-radius: 20px;
   background-color: lightblue;
   color: black;
-}
-.homepage-footer .copyright {
-  font-size: 13px;
 }
 
 .search {
@@ -69,6 +63,16 @@ section.homepage .homepage-body .account a {
   width: 100%;
   padding: 20px 17px 15px;
   background-color: #f1f4f7;
+}
+@media only screen and (min-width: 450px) {
+  .search {
+    padding: 20px 25px 15px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .search {
+    padding: 20px 35px 15px;
+  }
 }
 .search input {
   padding: 7px;
@@ -85,6 +89,16 @@ section.homepage .homepage-body .account a {
   top: 40%;
   font-size: 18px;
   color: grey;
+}
+@media only screen and (min-width: 450px) {
+  .search i {
+    right: 30px;
+  }
+}
+@media only screen and (min-width: 450px) {
+  .search i {
+    right: 40px;
+  }
 }
 .search i:active {
   color: blue;
@@ -149,8 +163,8 @@ ul li .icons i:active {
 
 .add-task {
   position: fixed;
-  bottom: 80px;
-  right: 30px;
+  bottom: 70px;
+  right: 50px;
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -167,7 +181,7 @@ ul li .icons i:active {
   color: #f1f4f7;
 }
 
-section.task-textarea {
+.task-textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -175,16 +189,17 @@ section.task-textarea {
   gap: 0px;
   display: none;
   background-color: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  margin-bottom: 0;
+  position: fixed;
+  width: 90%;
+  bottom: 70px;
+  left: 5%;
   z-index: 3;
   overflow: hidden;
+  border: 1px solid grey;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-section.task-textarea textarea {
+.task-textarea textarea {
   width: 100%;
   height: 50px;
   padding: 5px;
@@ -193,7 +208,7 @@ section.task-textarea textarea {
   border-bottom: 1px solid #f1f4f7;
   outline: none;
 }
-section.task-textarea button {
+.task-textarea button {
   background: #f1f4f7;
   border: none;
   border-radius: 10px;
@@ -202,7 +217,7 @@ section.task-textarea button {
   align-self: flex-end;
   color: grey;
 }
-section.task-textarea button:active {
+.task-textarea button:active {
   background: grey;
   color: white;
 }
