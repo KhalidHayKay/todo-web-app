@@ -28,8 +28,6 @@ navBtn.forEach(btn => {
 
 
 
-
-
 function addSectionClassName(name){
 	sessionStorage.setItem('current page className', name);
 }
@@ -49,6 +47,3 @@ function showSection(sectionClassName){
 	})
 	currentPage.style.display = 'block';
 }
-
-
-

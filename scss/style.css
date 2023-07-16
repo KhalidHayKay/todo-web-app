@@ -163,7 +163,21 @@ ul li .detail {
   overflow: hidden;
 }
 ul li .detail p {
-  font-size: 13px;
+  font-size: 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+@media only screen and (min-width: 350px) {
+  ul li .detail p {
+    -webkit-line-clamp: 2;
+  }
+}
+@media only screen and (min-width: 600px) {
+  ul li .detail p {
+    font-size: 13px;
+  }
 }
 ul li .detail span {
   font-size: 11px;

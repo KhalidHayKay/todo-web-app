@@ -80,7 +80,18 @@ ul {
             overflow: hidden;
 
             p {
-                font-size: 13px;
+                font-size: 12px;
+
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                @include MQ(350px){
+                    -webkit-line-clamp: 2;
+                }
+                @include MQ(600px){
+                    font-size: 13px;
+                }
             }
             span {
                 font-size: 11px;
