@@ -13,17 +13,16 @@ navBtn.forEach(btn => {
 		
 		if(e.target === navBtn[0]){
 			hideSections();
-			addSectionClassList('homepage')
+			addSectionClassName('homepage')
 		} else if(e.target === navBtn[1]){
 			hideSections();
-			addSectionClassList('todo-list')
+			addSectionClassName('todo-list')
 		} else if(e.target === navBtn[2]){
 			hideSections();
-			addSectionClassList('archives');
+			addSectionClassName('archives');
 		}
 
 		showSection(sessionStorage.getItem('current page className'));
-		
 	})
 })
 
@@ -31,7 +30,7 @@ navBtn.forEach(btn => {
 
 
 
-function addSectionClassList(name){
+function addSectionClassName(name){
 	sessionStorage.setItem('current page className', name);
 }
 

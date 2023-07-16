@@ -10,10 +10,17 @@
     @include MQ(768px){
         padding: 20px 35px 15px;
     }
+    @include MQ(992px){
+        width: 85%;
+        padding: 20px 45px 15px;
+    }
+    @include MQ(1200px){
+        padding: 20px 60px 15px;
+    }
 
     input {
         padding: 7px;
-        padding-right: 25px;
+        padding-right: 30px;
         width: 100%;
         border: none;
         border-radius: 10px;
@@ -23,15 +30,21 @@
 
     i {
         position: absolute;
-        right: 22px;
+        right: 25px;
         top: 40%;
         font-size: 18px;
         color: $secondaryTextColor;
         @include MQ(450px){
-            right: 30px;
+            right: 35px;
         }
-        @include MQ(450px){
-            right: 40px;
+        @include MQ(768px){
+            right: 43px;
+        }
+        @include MQ(992px){
+            right: 55px;
+        }
+        @include MQ(1200px){
+            right: 65px;
         }
 
         &:active {
@@ -44,6 +57,11 @@ ul {
     @include flex($gap: 10px);
     list-style: none;
     padding: 70px 0 10px;
+
+    .empty {
+        margin-top: 35vh;
+        display: none;
+    }
 
     li {
         height: 70px;
@@ -59,10 +77,10 @@ ul {
             width: 90%;
             height: 100%;
             @include flex($align: flex-start, $justify: space-between);
+            overflow: hidden;
 
             p {
                 font-size: 13px;
-                // align
             }
             span {
                 font-size: 11px;
@@ -94,9 +112,22 @@ ul {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    border: solid 1px $secondaryTextColor;
     background-color: $secondaryTextColor;
     @include flex();
+    
+    &:active {
+        i {
+            color: $primaryTextColor;
+        }
+    }
+
+    @include MQ(992px){
+        bottom: 40px;
+        right: 9%;
+    }
+    @include MQ(992px){
+        right: 10%;
+    }
 
     i {
     font-size: 28px;
@@ -119,6 +150,11 @@ ul {
     border: 1px solid $secondaryTextColor;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    @include MQ(992px){
+        bottom: 15px;
+        left: 4%;
+        width: 77%;
+    }
 
     textarea {
         width: 100%;
@@ -128,20 +164,31 @@ ul {
         border: none;
         border-bottom: 1px solid $primaryColor;
         outline: none;
+        @include MQ(992px){
+            height: 70px;
+        }
     }
 
-    button {
-        background: $primaryColor;
-        border: none;
-        border-radius: 10px;
-        padding: 5px 10px;
-        margin: 5px;
-        align-self: flex-end;
-        color: $secondaryTextColor;
+    div {
+        @include flex(row, $justify: space-between);
+        width: 100%;
+        @include MQ(992px){
+            padding: 0 30px;
+        }
 
-        &:active {
-            background: $secondaryTextColor;
-            color: $secondaryColor;
+        button {
+            background: $primaryColor;
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin: 5px;
+            align-self: flex-end;
+            color: $secondaryTextColor;
+    
+            &:active {
+                background: $secondaryTextColor;
+                color: $secondaryColor;
+            }
         }
     }
 }

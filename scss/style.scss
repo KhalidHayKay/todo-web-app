@@ -12,7 +12,7 @@ $secondaryTextColor: grey;
 
 body {
     font-family: poppins, arial;
-    background-color: $primaryColor;
+    overflow-y: scroll;
 }
 
 @mixin flex($direction: column, $align: center, $justify: center, $gap: 5px){
@@ -35,6 +35,14 @@ body {
 
 //////////////////////////////////////////
 
+main {
+    min-height: 100vh;
+    background-color: $primaryColor;
+    @include MQ(992px){
+        width: 85%;
+    }
+}
+
 h1 {
     font-size: 20px;
     text-align: center;
@@ -42,29 +50,52 @@ h1 {
 }
 
 section {
-    background-color: $primaryColor;
-    margin-bottom: 75px;
-
     display: none;
+
+    background-color: $primaryColor;
+    padding-bottom: 75px;
+    @include MQ(992px){
+        padding-bottom: 20px;
+    }
 }
 
 nav  {
     position: fixed;
     bottom: 0;
     width: 100%;
+    padding: 10px 50px;
     background-color: $primaryColor;
     @include flex(row, $gap: 20px, $justify: space-evenly);
-    padding: 10px 50px;
-    // border-bottom: 1px solid $secondaryTextColor;
+
+    @include MQ(992px){
+        @include flex($gap: 25px, $align: flex-start);
+        top: 20px;
+        right: 6%;
+        width: fit-content;
+        height: fit-content;
+        background-color: transparent;
+        padding: 10px;
+    }
+    @include MQ(1200px){
+        right: 8%;
+    }
 
     a {
         text-decoration: none;
         @include flex($gap: 5px);
         font-size: 11px;
+        @include MQ(992px){
+            @include flex(row, $gap: 5px);
+            color: $secondaryTextColor;
+            // font-size: 12px;
+        }
 
         i {
             color: #555;
             font-size: 20px;
+            @include MQ(992px){
+                font-size: 22px;
+            }
         }
     }
 }

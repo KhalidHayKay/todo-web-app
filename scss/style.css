@@ -6,7 +6,7 @@
 
 body {
   font-family: poppins, arial;
-  background-color: #f1f4f7;
+  overflow-y: scroll;
 }
 
 section.homepage .homepage-body {
@@ -74,9 +74,20 @@ section.homepage .homepage-body .homepage-footer .guide {
     padding: 20px 35px 15px;
   }
 }
+@media only screen and (min-width: 992px) {
+  .search {
+    width: 85%;
+    padding: 20px 45px 15px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .search {
+    padding: 20px 60px 15px;
+  }
+}
 .search input {
   padding: 7px;
-  padding-right: 25px;
+  padding-right: 30px;
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -85,19 +96,29 @@ section.homepage .homepage-body .homepage-footer .guide {
 }
 .search i {
   position: absolute;
-  right: 22px;
+  right: 25px;
   top: 40%;
   font-size: 18px;
   color: grey;
 }
 @media only screen and (min-width: 450px) {
   .search i {
-    right: 30px;
+    right: 35px;
   }
 }
-@media only screen and (min-width: 450px) {
+@media only screen and (min-width: 768px) {
   .search i {
-    right: 40px;
+    right: 43px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .search i {
+    right: 55px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .search i {
+    right: 65px;
   }
 }
 .search i:active {
@@ -112,6 +133,10 @@ ul {
   gap: 10px;
   list-style: none;
   padding: 70px 0 10px;
+}
+ul .empty {
+  margin-top: 35vh;
+  display: none;
 }
 ul li {
   height: 70px;
@@ -135,6 +160,7 @@ ul li .detail {
   align-items: flex-start;
   justify-content: space-between;
   gap: 5px;
+  overflow: hidden;
 }
 ul li .detail p {
   font-size: 13px;
@@ -168,13 +194,26 @@ ul li .icons i:active {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  border: solid 1px grey;
   background-color: grey;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+.add-task:active i {
+  color: black;
+}
+@media only screen and (min-width: 992px) {
+  .add-task {
+    bottom: 40px;
+    right: 9%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .add-task {
+    right: 10%;
+  }
 }
 .add-task i {
   font-size: 28px;
@@ -199,6 +238,13 @@ ul li .icons i:active {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+@media only screen and (min-width: 992px) {
+  .task-textarea {
+    bottom: 15px;
+    left: 4%;
+    width: 77%;
+  }
+}
 .task-textarea textarea {
   width: 100%;
   height: 50px;
@@ -208,7 +254,25 @@ ul li .icons i:active {
   border-bottom: 1px solid #f1f4f7;
   outline: none;
 }
-.task-textarea button {
+@media only screen and (min-width: 992px) {
+  .task-textarea textarea {
+    height: 70px;
+  }
+}
+.task-textarea div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+}
+@media only screen and (min-width: 992px) {
+  .task-textarea div {
+    padding: 0 30px;
+  }
+}
+.task-textarea div button {
   background: #f1f4f7;
   border: none;
   border-radius: 10px;
@@ -217,13 +281,13 @@ ul li .icons i:active {
   align-self: flex-end;
   color: grey;
 }
-.task-textarea button:active {
+.task-textarea div button:active {
   background: grey;
   color: white;
 }
 
 section.archives h2 {
-  margin: 20px;
+  padding: 20px;
   font-size: 20px;
   text-align: center;
 }
@@ -246,6 +310,16 @@ section.archives ul li i {
   padding-left: 10px;
 }
 
+main {
+  min-height: 100vh;
+  background-color: #f1f4f7;
+}
+@media only screen and (min-width: 992px) {
+  main {
+    width: 85%;
+  }
+}
+
 h1 {
   font-size: 20px;
   text-align: center;
@@ -253,22 +327,49 @@ h1 {
 }
 
 section {
-  background-color: #f1f4f7;
-  margin-bottom: 75px;
   display: none;
+  background-color: #f1f4f7;
+  padding-bottom: 75px;
+}
+@media only screen and (min-width: 992px) {
+  section {
+    padding-bottom: 20px;
+  }
 }
 
 nav {
   position: fixed;
   bottom: 0;
   width: 100%;
+  padding: 10px 50px;
   background-color: #f1f4f7;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   gap: 20px;
-  padding: 10px 50px;
+}
+@media only screen and (min-width: 992px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 25px;
+    top: 20px;
+    right: 6%;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    background-color: transparent;
+    padding: 10px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  nav {
+    right: 8%;
+  }
 }
 nav a {
   text-decoration: none;
@@ -279,7 +380,22 @@ nav a {
   gap: 5px;
   font-size: 11px;
 }
+@media only screen and (min-width: 992px) {
+  nav a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: grey;
+  }
+}
 nav a i {
   color: #555;
   font-size: 20px;
+}
+@media only screen and (min-width: 992px) {
+  nav a i {
+    font-size: 22px;
+  }
 }/*# sourceMappingURL=style.css.map */
