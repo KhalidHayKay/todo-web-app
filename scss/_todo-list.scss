@@ -53,15 +53,15 @@
     }
 }
 
+.empty {
+    margin-top: 35vh;
+    // display: none;
+}
+
 ul {
     @include flex($gap: 10px);
     list-style: none;
     padding: 70px 0 10px;
-
-    .empty {
-        margin-top: 35vh;
-        display: none;
-    }
 
     li {
         height: 70px;

@@ -125,6 +125,10 @@ section.homepage .homepage-body .homepage-footer .guide {
   color: blue;
 }
 
+.empty {
+  margin-top: 35vh;
+}
+
 ul {
   display: flex;
   flex-direction: column;
@@ -133,10 +137,6 @@ ul {
   gap: 10px;
   list-style: none;
   padding: 70px 0 10px;
-}
-ul .empty {
-  margin-top: 35vh;
-  display: none;
 }
 ul li {
   height: 70px;
