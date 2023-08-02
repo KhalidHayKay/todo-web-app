@@ -1,6 +1,6 @@
 import { storage, Task, DateAndTime, todoListArr } from './list.js';
 
-const archivedTaskContainer = document.querySelector('.archives ul');
+const archivedTaskContainer = document.querySelector('.archive ul');
 let archivedTaskArr = storage.get('archiveArr') === null ? [] : storage.get('archiveArr');
 
 window.addEventListener('DOMContentLoaded', e => {

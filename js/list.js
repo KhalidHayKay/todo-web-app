@@ -60,7 +60,7 @@ const storage = {
 
 function checkTodolistEmptiness()
 {
-    const empty = document.querySelector('section.todo-list ul .empty');
+    const empty = document.querySelector('section.home ul .empty');
     if(listContainer.lastElementChild === empty)
     { 
         empty.style.display = 'block';
@@ -75,7 +75,7 @@ let todoListArr = storage.get('listArr') === null ? [] : storage.get('listArr');
 const addTaskBtn = document.querySelector('div.add-task');
 const addTaskTextarea = document.querySelector('div.task-textarea');
 const textarea = document.querySelector('div.task-textarea>textarea');
-const listContainer = document.querySelector('section.todo-list ul');
+const listContainer = document.querySelector('section.home ul');
 
 // Print previous stored tasks
 window.addEventListener('DOMContentLoaded', e => {

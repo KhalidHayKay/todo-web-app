@@ -31,7 +31,7 @@ body {
 
 ///////////////////////////////////////////
 
-@import "homepage", "todo-list", "archive";
+@import "home", "archive";
 
 //////////////////////////////////////////
 
@@ -51,7 +51,7 @@ h1 {
 
 section {
     display: none;
-
+    
     background-color: $primaryColor;
     padding-bottom: 75px;
     @include MQ(992px){

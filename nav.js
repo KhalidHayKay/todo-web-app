@@ -1,47 +1,49 @@
 const pageSections = document.querySelectorAll('section');
+const nav = document.querySelector('nav');
+const navBtns = document.querySelectorAll('nav a');
 
-if(sessionStorage.getItem('current page className') != null){
-	showSection(sessionStorage.getItem('current page className'));
-} else {
-	showSection('homepage');
-}
-
-const navBtn = document.querySelectorAll('nav a');
-navBtn.forEach(btn => {
-	btn.addEventListener('click', e => {
-		e.preventDefault();
-		
-		if(e.target === navBtn[0]){
-			hideSections();
-			addSectionClassName('homepage')
-		} else if(e.target === navBtn[1]){
-			hideSections();
-			addSectionClassName('todo-list')
-		} else if(e.target === navBtn[2]){
-			hideSections();
-			addSectionClassName('archives');
-		}
-
-		showSection(sessionStorage.getItem('current page className'));
-	})
+window.addEventListener('DOMContentLoaded', e => {
+	if(sessionStorage.getItem('current page') == null){
+		showSection('home');
+	} else {
+		showSection(getSectionClassName());
+	}
 })
 
+nav.addEventListener('click', e => {
+	let id = e.target.dataset.id;
+	if(id == 'home')
+	{
+		hideAllSection();
+		setSectionClassName(id);
+		showSection(getSectionClassName());
+	} else if(id == 'archive')
+	{
+		hideAllSection();
+		setSectionClassName(id);
+		showSection(getSectionClassName());
+	}
+})
 
-
-function addSectionClassName(name){
-	sessionStorage.setItem('current page className', name);
+function getSectionClassName()
+{
+	return sessionStorage.getItem('current page');
 }
 
-function hideSections(){
+function setSectionClassName(name){
+	sessionStorage.setItem('current page', name);
+}
+
+function hideAllSection(){
 	pageSections.forEach(section => {
 		section.style.display = 'none';
 	})
 }
 
-function showSection(sectionClassName){
+function showSection(name){
 	let currentPage;
 	pageSections.forEach(section => {
-		if(section.classList.contains(sectionClassName)){
+		if(section.classList.contains(name)){
 			currentPage = section;
 		}
 	})

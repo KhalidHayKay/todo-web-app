@@ -9,55 +9,7 @@ body {
   overflow-y: scroll;
 }
 
-section.homepage .homepage-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px;
-}
-section.homepage .homepage-body .homepage-header p {
-  text-align: center;
-  padding: 0 40px;
-}
-section.homepage .homepage-body .account {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-section.homepage .homepage-body .account a {
-  font-size: 15px;
-  background-color: lightgrey;
-  opacity: 80%;
-  color: black;
-  padding: 5px 10px;
-  border-radius: 2px;
-  text-decoration: none;
-}
-section.homepage .homepage-body .color-mode div {
-  height: 30px;
-  width: 30px;
-  background-color: black;
-  border-radius: 50%;
-}
-section.homepage .homepage-body .homepage-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-section.homepage .homepage-body .homepage-footer .guide {
-  text-decoration: none;
-  padding: 5px;
-  border-radius: 20px;
-  background-color: lightblue;
-  color: black;
-}
-
-.search {
+section.home .search {
   position: fixed;
   top: 0;
   width: 100%;
@@ -65,27 +17,27 @@ section.homepage .homepage-body .homepage-footer .guide {
   background-color: #f1f4f7;
 }
 @media only screen and (min-width: 450px) {
-  .search {
+  section.home .search {
     padding: 20px 25px 15px;
   }
 }
 @media only screen and (min-width: 768px) {
-  .search {
+  section.home .search {
     padding: 20px 35px 15px;
   }
 }
 @media only screen and (min-width: 992px) {
-  .search {
+  section.home .search {
     width: 85%;
     padding: 20px 45px 15px;
   }
 }
 @media only screen and (min-width: 1200px) {
-  .search {
+  section.home .search {
     padding: 20px 60px 15px;
   }
 }
-.search input {
+section.home .search input {
   padding: 7px;
   padding-right: 30px;
   width: 100%;
@@ -94,7 +46,7 @@ section.homepage .homepage-body .homepage-footer .guide {
   outline-color: #f1f4f7;
   color: grey;
 }
-.search i {
+section.home .search i {
   position: absolute;
   right: 25px;
   top: 40%;
@@ -102,30 +54,29 @@ section.homepage .homepage-body .homepage-footer .guide {
   color: grey;
 }
 @media only screen and (min-width: 450px) {
-  .search i {
+  section.home .search i {
     right: 35px;
   }
 }
 @media only screen and (min-width: 768px) {
-  .search i {
+  section.home .search i {
     right: 43px;
   }
 }
 @media only screen and (min-width: 992px) {
-  .search i {
+  section.home .search i {
     right: 55px;
   }
 }
 @media only screen and (min-width: 1200px) {
-  .search i {
+  section.home .search i {
     right: 65px;
   }
 }
-.search i:active {
+section.home .search i:active {
   color: blue;
 }
-
-ul {
+section.home ul {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,12 +85,12 @@ ul {
   list-style: none;
   padding: 70px 0 10px;
 }
-ul .empty {
+section.home ul .empty {
   margin-top: 35vh;
   display: none;
   opacity: 60%;
 }
-ul li {
+section.home ul li {
   height: 70px;
   width: 90%;
   background-color: white;
@@ -153,7 +104,7 @@ ul li {
   border-radius: 5px;
   box-shadow: 1px 1px 2px 0 grey;
 }
-ul li .detail {
+section.home ul li .detail {
   width: 90%;
   height: 100%;
   display: flex;
@@ -163,7 +114,7 @@ ul li .detail {
   gap: 5px;
   overflow: hidden;
 }
-ul li .detail p {
+section.home ul li .detail p {
   font-size: 12px;
   overflow: hidden;
   display: -webkit-box;
@@ -171,20 +122,20 @@ ul li .detail p {
   -webkit-box-orient: vertical;
 }
 @media only screen and (min-width: 350px) {
-  ul li .detail p {
+  section.home ul li .detail p {
     -webkit-line-clamp: 2;
   }
 }
 @media only screen and (min-width: 600px) {
-  ul li .detail p {
+  section.home ul li .detail p {
     font-size: 13px;
   }
 }
-ul li .detail span {
+section.home ul li .detail span {
   font-size: 11px;
   color: grey;
 }
-ul li .icons {
+section.home ul li .icons {
   width: 10px;
   height: 100%;
   display: flex;
@@ -195,14 +146,13 @@ ul li .icons {
   font-size: 13px;
   color: grey;
 }
-ul li .icons i {
+section.home ul li .icons i {
   padding: 1px 0;
 }
-ul li .icons i:active {
+section.home ul li .icons i:active {
   color: black;
 }
-
-.add-task {
+section.home .add-task {
   position: fixed;
   bottom: 70px;
   right: 50px;
@@ -216,26 +166,25 @@ ul li .icons i:active {
   justify-content: center;
   gap: 5px;
 }
-.add-task:active i {
+section.home .add-task:active i {
   color: black;
 }
 @media only screen and (min-width: 992px) {
-  .add-task {
+  section.home .add-task {
     bottom: 40px;
     right: 9%;
   }
 }
 @media only screen and (min-width: 992px) {
-  .add-task {
+  section.home .add-task {
     right: 10%;
   }
 }
-.add-task i {
+section.home .add-task i {
   font-size: 28px;
   color: #f1f4f7;
 }
-
-.task-textarea {
+section.home .task-textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -254,13 +203,13 @@ ul li .icons i:active {
   border-top-right-radius: 10px;
 }
 @media only screen and (min-width: 992px) {
-  .task-textarea {
+  section.home .task-textarea {
     bottom: 15px;
     left: 4%;
     width: 77%;
   }
 }
-.task-textarea textarea {
+section.home .task-textarea textarea {
   width: 100%;
   height: 50px;
   padding: 5px;
@@ -270,11 +219,11 @@ ul li .icons i:active {
   outline: none;
 }
 @media only screen and (min-width: 992px) {
-  .task-textarea textarea {
+  section.home .task-textarea textarea {
     height: 70px;
   }
 }
-.task-textarea div {
+section.home .task-textarea div {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -283,11 +232,11 @@ ul li .icons i:active {
   width: 100%;
 }
 @media only screen and (min-width: 992px) {
-  .task-textarea div {
+  section.home .task-textarea div {
     padding: 0 30px;
   }
 }
-.task-textarea div button {
+section.home .task-textarea div button {
   background: #f1f4f7;
   border: none;
   border-radius: 10px;
@@ -296,30 +245,30 @@ ul li .icons i:active {
   align-self: flex-end;
   color: grey;
 }
-.task-textarea div button:active {
+section.home .task-textarea div button:active {
   background: grey;
   color: white;
 }
 
-section.archives h2 {
+section.archive h2 {
   padding: 20px;
   font-size: 20px;
   text-align: center;
 }
-section.archives ul {
+section.archive ul {
   padding: 20px 0;
   gap: 5px;
 }
-section.archives ul li {
+section.archive ul li {
   height: 45px;
   background-color: grey;
   color: white;
   box-shadow: none;
 }
-section.archives ul li p {
+section.archive ul li p {
   font-size: 13px;
 }
-section.archives ul li i {
+section.archive ul li i {
   font-size: 15px;
   border-left: 1px solid #f1f4f7;
   padding-left: 10px;
