@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
 nav.addEventListener('click', e => {
 	let id = e.target.dataset.id;
+
 	if(id == 'home')
 	{
 		hideAllSection();

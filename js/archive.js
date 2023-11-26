@@ -1,65 +1,80 @@
-import { storage, Task, DateAndTime, todoListArr } from './list.js';
+import { storage, checkIfTodolistIsEmpty, todoListArr, createInnerHTML } from './list.js';
 
 const archivedTaskContainer = document.querySelector('.archive ul');
-let archivedTaskArr = storage.get('archiveArr') === null ? [] : storage.get('archiveArr');
+const clearAll = document.querySelector('section.archive div button');
+const emptyArchivedListIndicator = '<p class="empty">There are no archives</p>';
+
+let archivedListArr = storage.get('archiveArr') === null ? [] : storage.get('archiveArr');
 
 window.addEventListener('DOMContentLoaded', e => {
-    archivedTaskArr.forEach(list => {
-        const archive = new TaskArchive(list.name, list.taskId)
-        archive.printArchive();
-    });
+    const element = createArchiveInnerHTML(archivedListArr);
+
+    checkIfTodolistIsEmpty(archivedTaskContainer, emptyArchivedListIndicator);
 })
 
-class TaskArchive
-{
-    constructor(name, id)
-    {
-        this.name = name;
-        this.taskId = id;
-    }
-
-    #buildElement()
-    {
-        const element = document.createElement('li');
-        element.innerHTML =  `
-            <p>${this.name}</p>
-            <i class='bx bx-archive-out' data-id=${this.taskId}></i>
-        `
-        return element;
-    }
-
-    printArchive()
-    {
-        archivedTaskContainer.appendChild(this.#buildElement());
-        // Unarchive events
-        archivedTaskContainer.addEventListener('click', e => {
-            e.stopImmediatePropagation();
-
-            if(e.target.classList.contains('bx-archive-out')){
-                const newTask = new Task(
-                    e.target.previousElementSibling.textContent,
-                    DateAndTime(),
-                    e.target.dataset.id
-                )
-                newTask.print();
-                todoListArr.push(newTask);
-                storage.set('listArr', todoListArr);
-
-                e.target.parentElement.remove();
-                archivedTaskArr = storage.delete(archivedTaskArr, e.target.dataset.id);
-                storage.set('archiveArr', archivedTaskArr);
-            }
-        })
-    }
-
-    autoRemoveArchive()
-    {
-        setTimeout(() => {
-            archivedTaskContainer.removeChild();
-        }, 10000)
-    }
+function buildElement(item) {
+    return  `
+        <li>
+            <p>${item.name}</p>
+            <i class='bx bx-archive-out' data-id=${item.id}>res</i>
+        </li>
+   `
 }
 
+function createArchiveInnerHTML(arr) {
+   const lists = arr.map((item) => {
+       return buildElement(item)
+   })
 
+   let element = '';
+   lists.forEach(list => {
+       element = element + list;
+   });
+   
+   archivedTaskContainer.innerHTML = element;
 
-export { archivedTaskArr, TaskArchive};
+   Array.from(archivedTaskContainer.children).forEach(element => {
+       element.addEventListener('click', e => {
+           if(e.target.classList.contains('bx-archive-out')){
+               restore(e);
+           }
+       });
+   });
+}
+
+function restore(e) {
+    e.stopImmediatePropagation();
+    const id = e.target.dataset.id;
+
+    const todoListToBeRestored = archivedListArr.filter(item => item.id == id)[0];
+    todoListArr.push(todoListToBeRestored);
+    storage.set('listArr', todoListArr);
+    createInnerHTML(todoListArr);
+
+    archivedListArr = storage.delete(archivedListArr, id);
+    storage.set('archiveArr', archivedListArr);
+    createArchiveInnerHTML(archivedListArr);
+    checkIfTodolistIsEmpty(archivedTaskContainer, emptyArchivedListIndicator);
+}
+
+// autoRemoveArchive()
+// {
+//     setTimeout(() => {
+//         archivedTaskContainer.removeChild(this.#buildElement());
+//     }, 1000 * 5)
+// }
+
+clearAll.addEventListener('click', e => {
+    const proceedToClearArchive = confirm('WARNING: You are about to clear all your archives, click OK to proceed!');
+
+    if(proceedToClearArchive) {
+       archivedTaskContainer.innerHTML = emptyArchivedListIndicator;
+
+        archivedListArr = [];
+        storage.set('archiveArr', archivedListArr); 
+    } else {
+        return;
+    }
+})
+
+export { archivedListArr, createArchiveInnerHTML };

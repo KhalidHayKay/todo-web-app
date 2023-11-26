@@ -1,51 +1,31 @@
-import { archivedTaskArr, TaskArchive } from "./archive.js";
+import { archivedListArr, createArchiveInnerHTML } from "./archive.js";
 
-class Task
-{
-    constructor(taskName, date, taskId)
-    {
-        this.taskName = taskName;
-        this.date = date;
-        this.taskId = taskId;
-    }
+const addTaskTextarea = document.querySelector('div.task-textarea');
+const textarea = document.querySelector('div.task-textarea>textarea');
+const listContainer = document.querySelector('section.home ul');
+const emptyTodoListIndicator = '<p class="empty">Todo list is empty</p>';
 
-    #buildElement()
-    {
-        const element = document.createElement('li');
-        element.innerHTML =  `
-            <div class="detail">
-                <p>${this.taskName}</p>
-                <span>${this.date}</span>
-            </div>
-            <div class="icons">
-                <i class='bx bxs-pencil data-id=${this.taskId}'></i>
-                <i class='bx bxs-trash-alt' data-id=${this.taskId}></i>
-            </div>
-        `
-        return element
-    }
-
-    print()
-    {
-        listContainer.appendChild(this.#buildElement());
-        checkTodolistEmptiness();
-
-        // list events
-        listContainer.addEventListener('click', e => {
-            if(e.target.classList.contains('bxs-trash-alt')){
-                task.delete(e);
-            } else if(e.target.classList.contains('bxs-pencil'))
-            {
-                task.archive(e);
-            } else if(e.target.classList.contains('detail'))
-            {
-                task.edit(e);
-            }
-        })
+function checkIfTodolistIsEmpty(parent, emptyElement) {
+    if(parent.innerHTML === '')
+    { 
+        parent.innerHTML = emptyElement;
+    } else{
+        return;
     }
 }
 
-//Storage
+function dateTime() {
+    const dateFunction = new Date();
+
+    const date = dateFunction.getDate();
+    const month = dateFunction.toLocaleString('default', {month: 'short'});
+    const year = dateFunction.getFullYear() - 2000;
+    const hour = dateFunction.getHours().toString().padStart(2, 0);
+    const minute = dateFunction.getMinutes().toString().padStart(2, 0);
+
+    return `${hour}:${minute}. ${month} ${date}, ${year}`;
+}
+
 const storage = {
     set: (key, arr) => {
         sessionStorage.setItem(key, JSON.stringify(arr));
@@ -54,49 +34,79 @@ const storage = {
         return JSON.parse(sessionStorage.getItem(key));
     },
     delete: (arr, id) => {
-        return arr.filter(list => list.taskId != id);
+        return arr.filter(list => list.id != id);
     },
 }
 
-function checkTodolistEmptiness()
+let todoListArr = storage.get('listArr') === null ? [] : storage.get('listArr');
+
+// On page load, print previously stored tasks.
+window.addEventListener('DOMContentLoaded', e => {
+    const element = createInnerHTML(todoListArr);
+
+    checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
+})
+
+class Task
 {
-    const empty = document.querySelector('section.home ul .empty');
-    if(listContainer.lastElementChild === empty)
-    { 
-        empty.style.display = 'block';
-    } else{
-        empty.style.display = 'none';
+    constructor(name, date, id)
+    {
+        this.name = name;
+        this.date = date;
+        this.id = id;
+    }
+
+    addToListArr() {
+        todoListArr.push(this);
     }
 }
 
-// Main todolist array
-let todoListArr = storage.get('listArr') === null ? [] : storage.get('listArr');
-// Get HTML elements
-const addTaskBtn = document.querySelector('div.add-task');
-const addTaskTextarea = document.querySelector('div.task-textarea');
-const textarea = document.querySelector('div.task-textarea>textarea');
-const listContainer = document.querySelector('section.home ul');
+function buildElement(item) {
+     return  `
+        <li>
+            <div class="detail" data-id=${item.id}>
+                <p>${item.name}</p>
+                <span>${item.date}</span>
+            </div>
+            <div class="icons">
+                <i class='bx bxs-pencil' data-id=${item.id}>arc</i>
+                <i class='bx bxs-trash-alt' data-id=${item.id}>del</i>
+            </div>
+        </li>
+    `
+}
 
-// Print previous stored tasks
-window.addEventListener('DOMContentLoaded', e => {
-    todoListArr.forEach(task => {
-        const newTask = new Task(task.taskName, task.date, task.taskId);
-        newTask.print();
+function createInnerHTML(arr) {
+    const lists = arr.map((item) => {
+        return buildElement(item)
     })
 
-    checkTodolistEmptiness();
-})
+    let element = '';
+    lists.forEach(list => {
+        element = element + list;
+    });
+    
+    listContainer.innerHTML = element;
 
-// Textarea opener
-addTaskBtn.addEventListener('click', e => {
-    textArea.show();
+    Array.from(listContainer.children).forEach(taskElement => {
+        taskElement.addEventListener('click', e => {
+            if(e.target.classList.contains('bxs-trash-alt')){
+                task.delete(e);
+            } else if(e.target.classList.contains('bxs-pencil'))
+            {
+                task.archive(e);
+            } else if(e.target.classList.contains('detail'))
+            {
+                // console.log(e.target.firstElementChild.textContent + ' will be edited');
+                const id = e.target.dataset.id;
+                // console.log(id);
+                task.edit(e, id);
+            }
+        });
+    });
+}
 
-    addTaskTextarea.addEventListener('click', e => {
-        e.stopImmediatePropagation();
-        textArea.textareaBtnEvents(e);
-    })
-});
-
+let isEditMode = false;
 
 const textArea = {
     show: function(){
@@ -106,21 +116,45 @@ const textArea = {
         addTaskTextarea.style.display = 'none';
     },
 
-    textareaBtnEvents: function(e)
+    event: function(e, id = null)
     {
-        if(e.target.textContent === 'save'){
+        if(e.target.textContent === 'save') {
             if(textarea.value === ''){
                 alert('Task cannot be empty');
             } else {
-                const randomId = Math.random() * 1000000;
-                let newTask = new Task(
-                    textarea.value,
-                    DateAndTime(),
-                    randomId
-                );
-                newTask.print();
+                if(isEditMode) {
+                    // let id = firstEventPropagator.target.dataset.id;
+                    // console.log(id);
 
-                todoListArr.push(newTask);
+                    // const editedTask = todoListArr.filter(item => item.id == id);
+
+                    // editedTask[0].name = textarea.value;
+
+                    // todoListArr = todoListArr.filter(item => {
+                    //     if(item.id == id) {
+                    //         item = editedTask[0];
+                            
+                    //         return item;
+                    //     } 
+                        
+                    //     return item;
+                    // })
+
+                    // createInnerHTML(todoListArr);
+
+                    isEditMode = false;
+                } else {
+                    const id = Math.random() * 1000000;
+
+                    let newTask = new Task(
+                        textarea.value,
+                        dateTime(),
+                        id
+                    ).addToListArr();
+                }
+
+                createInnerHTML(todoListArr);
+                
                 storage.set('listArr', todoListArr);
 
                 textarea.value = '';
@@ -132,66 +166,112 @@ const textArea = {
     },
 }
 
-//Task
 const task = {
     delete: function(e)
     {
-        e.target.parentElement.parentElement.remove();
+        const proceedToDelete = confirm('WARNING: This Task will be permanently deleted, click OK to proceed!');
 
-        todoListArr = storage.delete(todoListArr, e.target.dataset.id);
-        storage.set('listArr', todoListArr);
-
-        checkTodolistEmptiness();
+        if(proceedToDelete) {
+            todoListArr = storage.delete(todoListArr, e.target.dataset.id);
+            storage.set('listArr', todoListArr);
+    
+            createInnerHTML(todoListArr);
+        } else {
+            return;
+        }
+        
+        checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
     },
 
-    // Edit (and viewing)
-    edit: function(e)
+    // Editing (and viewing) a task
+    edit: function(e, id)
     {
-        textarea.value = e.target.firstElementChild.textContent;
+        console.log(id);
+        isEditMode = true;
+        
         textArea.show();
 
-        addTaskTextarea.addEventListener('click', e => {
+        const event = (e, id) => {
             e.stopImmediatePropagation();
-            if(e.target.textContent === 'cancel')
-            {
-                textArea.hide();
-                textarea.value = '';
-            } else if(e.target.textContent === 'save')
-            {
-                textArea.hide()
-                textarea.value = '';
-            }
-        })
+            console.log(id);
+            textArea.event(e, id);
+        }
+
+        const ev = (e) => {
+            // e.stopImmediatePropagation();
+            event(e, id)
+        }
+
+        addTaskTextarea.addEventListener('click', ev);
+
+        // addTaskTextarea.removeEventListener('click', ev)
+
+        textarea.value = e.target.firstElementChild.textContent;
+
+        // addTaskTextarea.addEventListener('click', e => {
+        //     e.stopImmediatePropagation();
+        //     if(e.target.textContent === 'cancel')
+        //     {
+        //         textArea.hide();
+        //         textarea.value = '';
+        //     } else if(e.target.textContent === 'save')
+        //     {
+        //         textArea.hide()
+        //         textarea.value = '';
+        //     }
+        // })
     },
 
     archive: function(e)
     {
         e.stopImmediatePropagation();
-        const name = e.target.parentElement.previousElementSibling.firstElementChild.textContent;
-        const id = e.target.nextElementSibling.dataset.id;
-        const newTaskArchive = new TaskArchive(name, id);
-        newTaskArchive.printArchive();
+        const id = e.target.dataset.id;
 
-        archivedTaskArr.push(newTaskArchive);
-        storage.set('archiveArr', archivedTaskArr);
+        const newTaskArchive = todoListArr.filter(item => item.id == id)[0];
+        archivedListArr.push(newTaskArchive);
+        storage.set('archiveArr', archivedListArr);
+        createArchiveInnerHTML(archivedListArr);
 
-        todoListArr = storage.delete(todoListArr, id)
-        this.delete(e);
+        todoListArr = storage.delete(todoListArr, id);
+        storage.set('listArr', todoListArr);
+        createInnerHTML(todoListArr);
+        checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
     },
 }
 
-function DateAndTime()
-{
-    const dateFunction = new Date();
+// Textarea opener
+document.querySelector('div.add-task')
+.addEventListener('click', e => {
+    textArea.show();
+    textarea.focus();
 
-    const date = dateFunction.getDate();
-    const month = dateFunction.toLocaleString('default', {month: 'short'});
-    const year = dateFunction.getFullYear();
-    const hour = dateFunction.getHours().toString().padStart(2, 0);
-    const minute = dateFunction.getMinutes().toString().padStart(2, 0);
-
-    return `${hour}:${minute} ${month} ${date}, ${year}.`;
-}
+    addTaskTextarea.addEventListener('click', e => {
+        e.stopImmediatePropagation();
+        textArea.event(e);
+    })
+});
 
 
-export { storage, Task, DateAndTime, todoListArr };
+document.querySelector('.search')
+.addEventListener('click', e => {
+    if(e.target.classList.contains('bx-search')){
+        e.target.previousElementSibling.focus();
+    }
+
+    document.querySelector('.search>input').
+    addEventListener('keyup', e => {
+        const checkValue = e.target.value;
+
+        document.querySelectorAll('section.home ul li').
+        forEach(list => {
+            if(!list.firstElementChild.firstElementChild.textContent.includes(checkValue))
+            {
+                list.style.display = 'none';
+            } else {
+                list.style.display = 'flex';
+            }
+        })
+    })        
+})
+
+export { storage, checkIfTodolistIsEmpty, todoListArr, createInnerHTML };

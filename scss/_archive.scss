@@ -1,9 +1,22 @@
 section.archive 
 {
-    h2 {
+    div {
         padding: 20px;
-        font-size: 20px;
-        text-align: center;
+        @include flex(row, $justify: space-around);
+
+        h2 {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            &:active {
+                background-color: aliceblue;
+            }
+        }
     }
 
     ul {
