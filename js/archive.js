@@ -22,18 +22,17 @@ function buildElement(item) {
 }
 
 function createArchiveInnerHTML(arr) {
-   const lists = arr.map((item) => {
-       return buildElement(item)
-   })
-
    let element = '';
-   lists.forEach(list => {
+
+    arr.map(item =>  buildElement(item))
+    .forEach(list => {
        element = element + list;
    });
    
    archivedTaskContainer.innerHTML = element;
 
-   Array.from(archivedTaskContainer.children).forEach(element => {
+   Array.from(archivedTaskContainer.children)
+   .forEach(element => {
        element.addEventListener('click', e => {
            if(e.target.classList.contains('bx-archive-out')){
                restore(e);
@@ -65,8 +64,12 @@ function restore(e) {
 // }
 
 clearAll.addEventListener('click', e => {
-    const proceedToClearArchive = confirm('WARNING: You are about to clear all your archives, click OK to proceed!');
+    if(archivedTaskContainer.innerHTML = emptyArchivedListIndicator)
+    {
+        return;
+    }
 
+    const proceedToClearArchive = confirm('WARNING: You are about to clear all your archives, click OK to proceed!');
     if(proceedToClearArchive) {
        archivedTaskContainer.innerHTML = emptyArchivedListIndicator;
 

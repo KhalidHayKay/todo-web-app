@@ -1,9 +1,37 @@
 import { archivedListArr, createArchiveInnerHTML } from "./archive.js";
 
 const addTaskTextarea = document.querySelector('div.task-textarea');
-const textarea = document.querySelector('div.task-textarea>textarea');
+const textareaInput = document.querySelector('div.task-textarea>textarea');
 const listContainer = document.querySelector('section.home ul');
 const emptyTodoListIndicator = '<p class="empty">Todo list is empty</p>';
+
+let isEditMode = false;
+
+const storage = {
+    set: (key, arr) => {
+        sessionStorage.setItem(key, JSON.stringify(arr));
+    },
+    get: (key) => {
+        return JSON.parse(sessionStorage.getItem(key));
+    },
+    delete: (arr, id) => {
+        return arr.filter(list => list.id != id);
+    },
+}
+
+const defaultTask = {
+    name: 'My Task ( click to edit )',
+    date: dateTime(),
+    id: 11111.11111
+}
+let todoListArr = storage.get('listArr') === null ? [defaultTask] : storage.get('listArr');
+
+// On page load, print previously stored tasks.
+window.addEventListener('DOMContentLoaded', e => {
+    createInnerHTML(todoListArr);
+
+    checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
+})
 
 function checkIfTodolistIsEmpty(parent, emptyElement) {
     if(parent.innerHTML === '')
@@ -26,41 +54,6 @@ function dateTime() {
     return `${hour}:${minute}. ${month} ${date}, ${year}`;
 }
 
-const storage = {
-    set: (key, arr) => {
-        sessionStorage.setItem(key, JSON.stringify(arr));
-    },
-    get: (key) => {
-        return JSON.parse(sessionStorage.getItem(key));
-    },
-    delete: (arr, id) => {
-        return arr.filter(list => list.id != id);
-    },
-}
-
-let todoListArr = storage.get('listArr') === null ? [] : storage.get('listArr');
-
-// On page load, print previously stored tasks.
-window.addEventListener('DOMContentLoaded', e => {
-    const element = createInnerHTML(todoListArr);
-
-    checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
-})
-
-class Task
-{
-    constructor(name, date, id)
-    {
-        this.name = name;
-        this.date = date;
-        this.id = id;
-    }
-
-    addToListArr() {
-        todoListArr.push(this);
-    }
-}
-
 function buildElement(item) {
      return  `
         <li>
@@ -77,18 +70,17 @@ function buildElement(item) {
 }
 
 function createInnerHTML(arr) {
-    const lists = arr.map((item) => {
-        return buildElement(item)
-    })
-
     let element = '';
-    lists.forEach(list => {
+
+    arr.map(item => buildElement(item))
+    .forEach(list => {
         element = element + list;
     });
     
     listContainer.innerHTML = element;
 
-    Array.from(listContainer.children).forEach(taskElement => {
+    Array.from(listContainer.children)
+    .forEach(taskElement => {
         taskElement.addEventListener('click', e => {
             if(e.target.classList.contains('bxs-trash-alt')){
                 task.delete(e);
@@ -97,18 +89,14 @@ function createInnerHTML(arr) {
                 task.archive(e);
             } else if(e.target.classList.contains('detail'))
             {
-                // console.log(e.target.firstElementChild.textContent + ' will be edited');
                 const id = e.target.dataset.id;
-                // console.log(id);
                 task.edit(e, id);
             }
         });
     });
 }
 
-let isEditMode = false;
-
-const textArea = {
+const textarea = {
     show: function(){
         addTaskTextarea.style.display = 'flex';
     },
@@ -119,49 +107,49 @@ const textArea = {
     event: function(e, id = null)
     {
         if(e.target.textContent === 'save') {
-            if(textarea.value === ''){
+            if(textareaInput.value === ''){
                 alert('Task cannot be empty');
             } else {
                 if(isEditMode) {
-                    // let id = firstEventPropagator.target.dataset.id;
-                    // console.log(id);
+                    const editedTask = todoListArr.filter(item => item.id == id);
+                    editedTask[0].name = textareaInput.value;
 
-                    // const editedTask = todoListArr.filter(item => item.id == id);
-
-                    // editedTask[0].name = textarea.value;
-
-                    // todoListArr = todoListArr.filter(item => {
-                    //     if(item.id == id) {
-                    //         item = editedTask[0];
+                    todoListArr = todoListArr.filter(item => {
+                        if(item.id == id) {
+                            item = editedTask[0];
                             
-                    //         return item;
-                    //     } 
+                            return item;
+                        } 
                         
-                    //     return item;
-                    // })
-
-                    // createInnerHTML(todoListArr);
+                        return item;
+                    })
 
                     isEditMode = false;
                 } else {
                     const id = Math.random() * 1000000;
 
-                    let newTask = new Task(
-                        textarea.value,
-                        dateTime(),
-                        id
-                    ).addToListArr();
+                    const Task = {
+                        name: textareaInput.value,
+                        date: dateTime(),
+                        id: id,
+                    }
+                    
+                    todoListArr.push(Task);
                 }
 
                 createInnerHTML(todoListArr);
                 
                 storage.set('listArr', todoListArr);
 
-                textarea.value = '';
-                textArea.hide();
+                textareaInput.value = '';
+                textarea.hide();
             }
         } else if(e.target.textContent === 'cancel'){
-            textArea.hide();
+            if(isEditMode) {
+                textareaInput.value = ''
+                isEditMode = false;
+            };
+            textarea.hide();
         }
     },
 }
@@ -186,40 +174,15 @@ const task = {
     // Editing (and viewing) a task
     edit: function(e, id)
     {
-        console.log(id);
         isEditMode = true;
         
-        textArea.show();
+        textarea.show();
+        textareaInput.focus();
+        textareaInput.value = e.target.firstElementChild.textContent;
+        textareaInput.dataset.id = id;
 
-        const event = (e, id) => {
-            e.stopImmediatePropagation();
-            console.log(id);
-            textArea.event(e, id);
-        }
-
-        const ev = (e) => {
-            // e.stopImmediatePropagation();
-            event(e, id)
-        }
-
-        addTaskTextarea.addEventListener('click', ev);
-
-        // addTaskTextarea.removeEventListener('click', ev)
-
-        textarea.value = e.target.firstElementChild.textContent;
-
-        // addTaskTextarea.addEventListener('click', e => {
-        //     e.stopImmediatePropagation();
-        //     if(e.target.textContent === 'cancel')
-        //     {
-        //         textArea.hide();
-        //         textarea.value = '';
-        //     } else if(e.target.textContent === 'save')
-        //     {
-        //         textArea.hide()
-        //         textarea.value = '';
-        //     }
-        // })
+        addTaskTextarea.removeEventListener('click', textareaBtnClickEvent.newTask);
+        addTaskTextarea.addEventListener('click', textareaBtnClickEvent.taskEdit);
     },
 
     archive: function(e)
@@ -239,16 +202,26 @@ const task = {
     },
 }
 
+const textareaBtnClickEvent = {
+    newTask: (e) => {
+        e.stopImmediatePropagation();
+        textarea.event(e);
+    },
+
+    taskEdit: (e) => {
+        e.stopImmediatePropagation();
+        textarea.event(e, textareaInput.dataset.id);
+    }
+}
+
 // Textarea opener
 document.querySelector('div.add-task')
 .addEventListener('click', e => {
-    textArea.show();
-    textarea.focus();
+    textarea.show();
+    textareaInput.focus();
 
-    addTaskTextarea.addEventListener('click', e => {
-        e.stopImmediatePropagation();
-        textArea.event(e);
-    })
+    addTaskTextarea.removeEventListener('click', textareaBtnClickEvent.taskEdit);
+    addTaskTextarea.addEventListener('click', textareaBtnClickEvent.newTask)
 });
 
 
