@@ -199,6 +199,8 @@ const task = {
         storage.set('listArr', todoListArr);
         createInnerHTML(todoListArr);
         checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
+
+        alert('Your task has been archived. Click OK to continue');
     },
 }
 
@@ -224,7 +226,9 @@ document.querySelector('div.add-task')
     addTaskTextarea.addEventListener('click', textareaBtnClickEvent.newTask)
 });
 
-
+const noMatches = document.createElement('p');
+noMatches.classList.add('empty');
+noMatches.innerHTML = 'No match!'
 document.querySelector('.search')
 .addEventListener('click', e => {
     if(e.target.classList.contains('bx-search')){
@@ -242,6 +246,20 @@ document.querySelector('.search')
                 list.style.display = 'none';
             } else {
                 list.style.display = 'flex';
+            }
+
+            let numberOfMatches = 0;
+            if(list.style.display === 'flex') {
+                numberOfMatches++
+            }
+
+            if(numberOfMatches === 0) {
+                listContainer.appendChild(noMatches);
+            } else {
+                if(listContainer.lastElementChild != noMatches) {
+                    return;
+                }
+                listContainer.removeChild(noMatches);
             }
         })
     })        
