@@ -147,6 +147,7 @@ ul li .icons {
   color: grey;
 }
 ul li .icons i {
+  cursor: pointer;
   padding: 1px 0;
 }
 ul li .icons i:active {
@@ -154,6 +155,7 @@ ul li .icons i:active {
 }
 
 .add-task {
+  cursor: pointer;
   position: fixed;
   bottom: 70px;
   right: 50px;
@@ -265,6 +267,7 @@ section.archive div h2 {
   text-align: center;
 }
 section.archive div button {
+  cursor: pointer;
   padding: 5px;
   border: 1px solid black;
   border-radius: 5px;
@@ -286,6 +289,7 @@ section.archive ul li p {
   font-size: 13px;
 }
 section.archive ul li i {
+  cursor: pointer;
   font-size: 15px;
   border-left: 1px solid #f1f4f7;
   padding-left: 10px;

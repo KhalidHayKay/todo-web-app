@@ -41,6 +41,13 @@ function createArchiveInnerHTML(arr) {
    });
 }
 
+function removeArchiveById(id) {
+    archivedListArr = storage.delete(archivedListArr, id);
+    storage.set('archiveArr', archivedListArr);
+    createArchiveInnerHTML(archivedListArr);
+    checkIfTodolistIsEmpty(archivedTaskContainer, emptyArchivedListIndicator);
+}
+
 function restore(e) {
     e.stopImmediatePropagation();
     const id = e.target.dataset.id;
@@ -50,21 +57,18 @@ function restore(e) {
     storage.set('listArr', todoListArr);
     createInnerHTML(todoListArr);
 
-    archivedListArr = storage.delete(archivedListArr, id);
-    storage.set('archiveArr', archivedListArr);
-    createArchiveInnerHTML(archivedListArr);
-    checkIfTodolistIsEmpty(archivedTaskContainer, emptyArchivedListIndicator);
+    removeArchiveById(id);
 }
 
-// autoRemoveArchive()
-// {
-//     setTimeout(() => {
-//         archivedTaskContainer.removeChild(this.#buildElement());
-//     }, 1000 * 5)
-// }
+function autoRemoveArchive(id)
+{
+    setTimeout(() => {
+        removeArchiveById(id);
+    }, 60 * 60 * 1000)
+}
 
 clearAll.addEventListener('click', e => {
-    if(archivedTaskContainer.innerHTML = emptyArchivedListIndicator)
+    if(archivedTaskContainer.innerHTML === emptyArchivedListIndicator)
     {
         return;
     }
@@ -80,4 +84,4 @@ clearAll.addEventListener('click', e => {
     }
 })
 
-export { archivedListArr, createArchiveInnerHTML };
+export { archivedListArr, createArchiveInnerHTML, autoRemoveArchive };

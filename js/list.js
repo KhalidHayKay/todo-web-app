@@ -1,4 +1,4 @@
-import { archivedListArr, createArchiveInnerHTML } from "./archive.js";
+import { archivedListArr, createArchiveInnerHTML, autoRemoveArchive } from "./archive.js";
 
 const addTaskTextarea = document.querySelector('div.task-textarea');
 const textareaInput = document.querySelector('div.task-textarea>textarea');
@@ -200,7 +200,9 @@ const task = {
         createInnerHTML(todoListArr);
         checkIfTodolistIsEmpty(listContainer, emptyTodoListIndicator);
 
-        alert('Your task has been archived. Click OK to continue');
+        autoRemoveArchive(newTaskArchive.id);
+
+        alert('Your task has been archived and will be deleted in the next one hour. \nClick OK to continue');
     },
 }
 

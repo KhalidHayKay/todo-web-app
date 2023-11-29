@@ -1,6 +1,6 @@
-section.home
-{
-}
+// section.home
+// {
+// }
 
 .search {
     position: fixed;
@@ -111,6 +111,7 @@ ul {
             color: $secondaryTextColor;
 
             i {
+                cursor: pointer;
                 padding: 1px 0;
                 &:active {
                     color: $primaryTextColor;
@@ -121,6 +122,7 @@ ul {
 }
 
 .add-task {
+    cursor: pointer;
     position: fixed;
     bottom: 70px;
     right: 50px;
