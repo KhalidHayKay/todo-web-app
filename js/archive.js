@@ -16,7 +16,7 @@ function buildElement(item) {
     return  `
         <li>
             <p>${item.name}</p>
-            <i class='bx bx-archive-out' data-id=${item.id}>res</i>
+            <i class='bx bx-archive-out' data-id=${item.id}></i>
         </li>
    `
 }

@@ -62,8 +62,8 @@ function buildElement(item) {
                 <span>${item.date}</span>
             </div>
             <div class="icons">
-                <i class='bx bxs-pencil' data-id=${item.id}>arc</i>
-                <i class='bx bxs-trash-alt' data-id=${item.id}>del</i>
+                <i class='bx bxs-archive-in' data-id=${item.id}></i>
+                <i class='bx bxs-trash-alt' data-id=${item.id}></i>
             </div>
         </li>
     `
@@ -84,7 +84,7 @@ function createInnerHTML(arr) {
         taskElement.addEventListener('click', e => {
             if(e.target.classList.contains('bxs-trash-alt')){
                 task.delete(e);
-            } else if(e.target.classList.contains('bxs-pencil'))
+            } else if (e.target.classList.contains('bxs-archive-in'))
             {
                 task.archive(e);
             } else if(e.target.classList.contains('detail'))
